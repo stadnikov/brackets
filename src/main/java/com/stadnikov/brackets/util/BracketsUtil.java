@@ -11,11 +11,10 @@ public class BracketsUtil {
     public static boolean check(String text) {
         Deque<Character> deque = new LinkedList<>();
         int charsBetweenBrackets = 0;
-        char currentCharacter;
 
-        for (int i = 0; i < text.length(); i++) {
-            currentCharacter = text.charAt(i);
+        for (char currentCharacter : text.toCharArray()) {
             if (Character.isWhitespace(currentCharacter)) {
+                // не считаем пробельные символы за текст
                 continue;
             }
             charsBetweenBrackets++;
@@ -41,12 +40,7 @@ public class BracketsUtil {
             }
         }
 
-        if (deque.isEmpty()) {
-            // все скобки сошлись
-            return true;
-        } else {
-            // остались незакрытые скобки
-            return false;
-        }
+        // если очередь не пуста, то остались незакрытые скобки
+        return deque.isEmpty();
     }
 }
